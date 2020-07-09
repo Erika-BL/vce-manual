@@ -118,11 +118,15 @@
 	function openManual() {
 		document.getElementById("changelog").classList.add("hidden");
 		document.getElementById("manual").classList.remove("hidden");
+
+		document.querySelector("#manual .body").scrollTo(0,0);
 	}
 	
 	function openChangeLog() {
 		document.getElementById("manual").classList.add("hidden");
 		document.getElementById("changelog").classList.remove("hidden");
+
+		document.querySelector("#changelog .changelog-body").scrollTo(0,0);
 	}
 	
 	function openSection(elem) {
@@ -133,11 +137,10 @@
 			return;
 		}
 
-		console.log(elem);
 		document.querySelector(".entry.selected").classList.remove("selected");
 		document.querySelector(".body div.visible").classList.remove("visible");
+		document.querySelector("#manual .body").scrollTo(0,0);
 
-		console.log(elem.getAttribute("value"));
 		bodyelem.classList.add("visible");
 		elem.classList.add("selected");
 	}
