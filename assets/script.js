@@ -10,20 +10,21 @@ function openManual() {
 	document.querySelector("#manual .body").scrollTo(0,0);
 }
 
-function openChangeLog() {
+function openChangeLog(loaded) {
 	document.getElementById("manual").classList.add("hidden");
 	document.getElementById("changelog").classList.remove("hidden");
+	
+	if(!loaded) {
+		if(history.pushState)
+			history.pushState(null, null, '#changelog');
+		else
+			location.hash = '#changelog';
+	}
 
 	document.querySelector("#changelog .changelog-body").scrollTo(0,0);
-	
-	if(history.pushState)
-		history.pushState(null, null, '#changelog');
-	else
-		location.hash = '#changelog';
 }
 
 function openSection(event) {
-	console.log(event);
 	elem = event.srcElement;
 	var bodyelem = document.getElementById(elem.getAttribute("value"));
 
@@ -72,7 +73,7 @@ function loadManual(event) {
 	if(window.location.hash == "#changelog") {
 		document.getElementById("intro").classList.add("visible");
 		document.querySelector(".entry[value='intro']").classList.add("selected");
-		return openChangeLog();
+		return openChangeLog(true);
 	}
 	else {
 		document.getElementById("manual").classList.remove("hidden");
