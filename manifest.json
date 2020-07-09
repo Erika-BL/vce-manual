@@ -1,0 +1,9 @@
+{
+	"name":"Variable/Conditional Events Client",
+	"icons": [
+		{"src":"/assets/icon/script-code-256.png","sizes":"256x256","type":"image/png"}
+	],
+	"theme_color":"#3f86de",
+	"background_color":"#c8c8c8",
+	"display":"standalone"
+}

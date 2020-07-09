@@ -88,7 +88,7 @@ div.visible {
 }
 .vcebutton {
 	cursor: pointer;
-	background-image: url("./images/button.png");
+	background-image: url("./button.png");
 	background-position: 0 0;
 	background-size: 155px 70px;
 	font-family: "Arial", sans-serif;
