@@ -66,7 +66,6 @@ window.addEventListener("load", event => {
 });
 
 function loadManual(event) {
-	console.log(event);
 	if(window.location.hash == "")
 		window.location.hash = "#intro";
 	
