@@ -1,0 +1,150 @@
+&lt;font:Palatino Linotype:30&gt;Changelog&lt;just:left&gt;&lt;font:Palatino Linotype:18&gt;
+Stable: Was tested to be safe and usually approved by RTB file moderators.
+Public Beta: Was either hosted on a public server for people to try out or released by post (not uploaded to the add-ons section as official) to find bugs.
+Private Beta: Was released amongst our beta testers.
+Skipped: This version was skipped from stable release for certain reasons.
+Version 6.12 (Stable):
+   &lt;li&gt; Fixed singleplayer/host's variables not working bug (created by the loading save bugfix)
+Version 6.11 (Stable):
+   &lt;li&gt; Function arguments now work correctly
+   &lt;li&gt; Fixed v20 loading saves bug
+Version 6.1 (Stable):
+   &lt;li&gt; Fixed more than one word variables not working in if checks, this should fix the problems people were having with the version 6 update
+   &lt;li&gt; Added VCE_relayCallFunction &lt;Direction&gt;, for calling functions on bricks near by (requires full trust with the colliding brick)
+   &lt;li&gt; Fixed a few bugs that I never knew about
+      &lt;subli&gt; &lt;var:player:*&gt; was actually checking the triggering client's player inside Player -&gt; VCE_ifVariable
+      &lt;subli&gt; Client -&gt; VCE_modVariable & VCE_ifVariable was mistaking the client you were trying to change the variable on for for the processing/triggering client
+      &lt;subli&gt; Fixed ifHost replacer
+   &lt;li&gt; If the minimum number or max number is not set for the Random variable modding method it will now set it to a random float instead
+   &lt;li&gt; You can now use variable replacers in most VCE output event text boxes
+      &lt;subli&gt; VCE_modVariable variable names accept variable replacers, ifVariable, etc
+   &lt;li&gt; Removed annoying "This server has VCE %version" message
+      &lt;subli&gt; If you still want it you can set $Pref::Client::ShowVCEHandshake to 1 or look in the console as it says it in there when you join a server
+Version 6.01 (Stable):
+   &lt;li&gt; Fixed enabling and disabling events
+Version 6.00 (Stable, Private Beta):
+   &lt;li&gt; You can now directly modify certain special replacers, changes will be applied to a handling function
+      &lt;subli&gt; (meaning if you change "clanPrefix" it will automatically call a function and apply your changes, ie. set their clan prefix)
+      &lt;subli&gt; &lt;var:client:clanPrefix&gt;, &lt;var:client:clanSuffix&gt;
+      &lt;subli&gt; &lt;var:client:decal&gt;, &lt;var:client:face&gt;
+      &lt;subli&gt; &lt;var:player:health&gt;, &lt;var:player:damage&gt;, &lt;var:player:energy&gt;, &lt;var:player:vel&gt; (x, y, z)
+      &lt;subli&gt; &lt;var:player:currentItem&gt;, &lt;var:player:item1&gt; -&gt; &lt;var:player:item5&gt;
+      &lt;subli&gt; &lt;var:brick:colorid&gt;, &lt;var:brick:printcount&gt;, &lt;var:brick:printname&gt;
+      &lt;subli&gt; &lt;var:brick:name&gt;, &lt;var:brick:colorfxid&gt;, &lt;var:brick:printid&gt;, &lt;var:brick:shapefxid&gt;
+      &lt;subli&gt; &lt;var:vehicle:health&gt;, &lt;var:vehicle:damage&gt;
+   &lt;li&gt; Sub data can now contain logic
+      &lt;subli&gt; ~= 2 -- processes all event lines that have a 2 in their digits (2, 12, 20, 21, 22, ...)
+      &lt;subli&gt; != 2 -- processes all event lines except 2 (0, 1, 3, 4, ...)
+      &lt;subli&gt; == 2 -- processes only event line 2 (2)
+      &lt;subli&gt; &gt;= 2 -- processes all event lines larger than/equal to 2 (2, 3, 4, 5)
+      &lt;subli&gt; &gt; 2 -- processes all event lines smaller than 2 (0, 1)
+      &lt;subli&gt; &lt;= 2 -- processes all event lines smaller than/equal to 2 (0, 1, 2)
+   &lt;li&gt; You can now use | and & in ifVariable and ifValue. & for an AND operator and | for an OR operator.
+      &lt;subli&gt; Example &lt;var:client:score&gt; & &lt;var:client:bl_id&gt; == 1337
+         &lt;subli&gt;Computes to: Is the client's score and bl_id equal to 1337?
+   &lt;li&gt; Bug fixes
+      &lt;subli&gt; There was a massive bug in VCE_stateFunction (mindless copy pasta is not good)
+      &lt;subli&gt; Other bug fixes I can't remember
+   &lt;li&gt; Seperated the code into seperate files for easier reading
+      &lt;subli&gt; All of the code is pretty easy to look at, if you want to learn something
+         &lt;subli&gt; Except for outputs.cs... it's as dirty as Clockturn's mum
+   &lt;li&gt; Increased all VCE output events' textbox character limit
+   &lt;li&gt; Manual now caches to make reading the manual faster
+   &lt;li&gt; Avoided adding the 3rd client tab... again :D
+Version 5.81 (Stable):
+   &lt;li&gt; VERY important bug fix
+Version 5.8 (Stable):
+   &lt;li&gt; Added new replacers for the client target (decal,face,chest,hip,hat,accent,rleg,rarm,lleg,larm)
+   &lt;li&gt; Added new replacer for the player target (speed)
+   &lt;li&gt; Added new global replacers (hour,minute,second... good for real-time clocks)
+Version 5.7 (Stable):
+   &lt;li&gt; Fixed centerprintall and bottomprintall so that %1 works
+   &lt;li&gt; Made VCE_ifVariable and VCE_modVariable for minigames
+   &lt;li&gt; &lt;var:vehicle:maxhealth&gt;,&lt;var:vehicle:health&gt;,&lt;var:global:brickcount&gt;
+   &lt;li&gt; &lt;var:brick:ownername&gt;, &lt;var:brick:ownerbl_id&gt;, &lt;var:client:brickcount&gt;, &lt;var:player:energy&gt;
+Version 5.61 (Stable):
+   &lt;li&gt; Made it so all inputs have a bot target
+      &lt;subli&gt; The bot target will only work on vehicle spawns
+   &lt;li&gt; Some other minor stuff I can't remember
+Version 5.6 (Stable):
+   &lt;li&gt; Added onVariableUpdate. Triggered when VCE_modVariable is called on the brick, or when a varlink is clicked.
+   &lt;li&gt; Added &lt;varlink:linkname_varname:value&gt; for having links that you can click to set variables. 
+      &lt;subli&gt; For example, &lt;varlink:Click here_gold:1&gt; will appear as a blue "Click here" link, which when clicked will set the client's "gold" variable to 1. Use with onVariableUpdate to do something when the client's click the link.
+Version 5.5 (Stable):
+   &lt;li&gt; Added &lt;var:client:clanPrefix&gt; and &lt;var:client:clanSuffix&gt; - self explanatory
+   &lt;li&gt; Added ~= logic operator for every variable check. It checks if the value you enter on the right side of the operator is inside the value on the left side
+      &lt;subli&gt; 100 ~= 10; will trigger onVariableTrue because 10 is inside the string of 100
+   &lt;li&gt;Added VCE_retroCheck output for bricks. For all you whiners for lack of if* events. Has all of the old if* events in one event
+Version 5.43 (Stable):
+   &lt;li&gt; Fixed %1 not working in minigames
+   &lt;li&gt; Fixed displaying variables glitching up sometimes
+   &lt;li&gt; Made the manual pop up the first time you use variables and open the event gui
+Version 5.42 (Stable):
+   &lt;li&gt; Fixed general shit
+Version 5.41 (Stable):
+   &lt;li&gt; 'Global' special replacers (date, time, windows, macintosh, simtime, servername, port, maxplayercount, playercount)
+   &lt;li&gt; Fixed replacers sometimes displaying as the normal text without being replaced with values
+   &lt;li&gt; Added VCE_modVariable to each target
+Version 5.40 (Private Beta, Stable):
+   &lt;li&gt; Extensive update on the client-side of VCE (access menu by wrench events menu or bind a control)
+      &lt;subli&gt; Manual: Updates with the internet within 1 second (faster then the dropbox one, some sort of spam protection on dropbox?)
+      &lt;subli&gt; Changelog: Read this file in game with pretty icons lol
+      &lt;subli&gt; &lt;color:FF0000&gt;Coming in v5.41&lt;color:1E1E1E&gt; - Online: View and post tutorials on vce (or events in general?)
+         &lt;subli&gt; On my website &lt;a:www.zack0wack0.com&gt;zack0wack0.com&lt;/a&gt;
+      &lt;subli&gt; All icons from &lt;a:www.famfamfam.com&gt;famfamfam.com&lt;/a&gt; &lt;3
+   &lt;li&gt; Saving variables (VCE_loadVariable and VCE_saveVariable now allow saving of multiple variables seperated in a comma delimeted list ("gold,wood or gold, wood") :D ) 
+   &lt;li&gt; Vehicle and Minigame variable support (including variable replacers)
+   &lt;li&gt; VCE Functions with arguements &gt;:D
+Version 5.33 (Public Beta, Skipped):
+   &lt;li&gt; Fixed some small issues
+   &lt;li&gt; Remove VCE_callOutput
+      &lt;subli&gt; It's too god damn hacky :(
+Version 5.32 (Public Beta, Skipped):
+   &lt;li&gt; Fixed some small issues
+Version 5.31 (Public Beta, Skipped):
+   &lt;li&gt; Fixed some small issues
+Version 5.30 (Public Beta, Skipped):
+   &lt;li&gt; Vehicle and Minigame variable support
+   &lt;li&gt; VCE Functions with arguements &gt;:D
+      &lt;li&gt; State them with sub data then call them later with arguements seperated by |
+   &lt;li&gt; VCE_CallOutput (<span style="color: #FF0000>Removed</span>)
+      &lt;subli&gt; call output events with arguements that get filtered for replacers
+Version 5.23 (Stable):
+   &lt;li&gt; Now invulnerable from VCE for 5 seconds when spawning
+   &lt;li&gt; Fixed random numbers being displayed with TDM
+Version 5.22 (Stable):
+   &lt;li&gt; Fixed some small issues
+Version 5.00 (Private Beta, Stable):
+   &lt;li&gt; Variable Replacers; filters out messages with variable values
+         &lt;subli&gt; Syntax = &lt;var:target:name&gt;
+         &lt;subli&gt; Includes 'special values' (removes millions of If* outputs) such as &lt;var:client:name&gt; and &lt;var:client:BL_ID&gt;
+   &lt;li&gt; Multiple variable events, using 'sub data'
+         &lt;subli&gt; A valid example of sub data: 0 3 (only processes onVariableTrue or onVariableFalse in event lines 0 to 3)
+   &lt;li&gt; Code completely cleaned up
+Version 4.00 (Public Beta, Stable):
+   &lt;li&gt; ifPlayerScore
+   &lt;li&gt; ifPlayerID
+   &lt;li&gt; ifPlayerDamage
+   &lt;li&gt; ifPlayerEnergy
+   &lt;li&gt; ifPlayerSpeed
+   &lt;li&gt; ifLastPlayerMsg
+   &lt;li&gt; Saving variables by Truce
+Version 3.00 (Stable):
+   &lt;li&gt; ifAdmin
+   &lt;li&gt; ifBrickNameEquals
+   &lt;li&gt; ifPlayerNameEquals
+   &lt;li&gt; ifRandomDice
+   &lt;li&gt; ifRandom
+Version 2.00 (Stable):
+   &lt;li&gt; displayVariable
+   &lt;li&gt; setVariable, multiplyVariable etc for brick targets
+   &lt;li&gt; addVarToVar
+   &lt;li&gt; subVarToVar
+   &lt;li&gt; setVarToVar
+   &lt;li&gt; ifVarToVar
+   &lt;li&gt; Removed subVariable (use -1 in add variable)
+Version 1.10 (Stable):
+   &lt;li&gt; All ifVariables cleaned up into one
+Version 1.00 (Stable):
+   &lt;li&gt; Player and Client: setVariable, addVariable, subVariable, divideVariable, multiplyVariable
+   &lt;li&gt; ifVariableGreater, ifVaribleLess, ifVariableGreaterEquals, ifVariableLessEquals, ifVariableNotEquals, ifVariableEquals

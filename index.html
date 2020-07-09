@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Variable/Conditional Events Client</title>
+<style>
+	html, body {
+		height: 100%;
+		margin: 0;
+		background-color: #c8c8c8;
+	}
+	.flexbox {
+		display: flex;
+		margin: 4px;
+		height: calc(100vh - 61px);
+		background-color: #ebebeb;
+		padding: 8px;
+		border: 1px solid #646464;
+		border-radius: 2px;
+	}
+	h1 {
+		font-weight: normal;
+		font-family: "Palatino Linotype", serif;
+		text-align: center;
+		font-size: 20px;
+		margin: 4px;
+	}
+	div {
+		font-family: "Palatino Linotype", serif;
+		text-align: left;
+	}
+	ul {
+		margin: 4px;
+	}
+	#menu
+	{
+		flex: 1;
+		overflow-y: auto;
+		overflow-x: hidden;
+		border: solid 1px #000;
+		background-color: #fff;
+		display: inline-block;
+		font-family: "Palatino Linotype", serif;
+		font-size: 13px;
+		color: #000;
+		vertical-align: middle;
+		max-width: 169px;
+		margin-right: 9px;
+	}
+	.body, .changelog-body
+	{
+		flex: 2;
+		overflow-y: auto;
+		overflow-x: auto;
+		border: solid 1px #000;
+		background-color: #fff;
+		display: inline-block;
+		font-family: "Palatino Linotype", serif;
+		font-size: 14px;
+		color: #1E1E1E;
+		width: 100%;
+	}
+	.entry
+	{
+		padding: 5px;
+		vertical-align: middle;
+		display: inline-flex;
+		width: 100%;
+		color: rgba(30,30,30);
+	}
+	.entry[value]:not(.selected):hover
+	{
+		cursor: pointer;
+		color: #c8c8c8;
+	}
+	.entry.selected
+	{
+		background-color: #c8c8c8;
+	}
+	.icon {
+		width:16px;
+		height:16px;
+		margin-right:4px;
+	}
+	.flexbox.hidden, .body div {
+		display: none !important;
+	}
+	div.visible {
+		display: block !important;
+	}
+	.vcebuttons {
+		height: 35px;
+		display: table;
+	}
+	.vcebutton {
+		cursor: pointer;
+		background-image: url("./images/button.png");
+		background-position: 0 0;
+		background-size: 155px 70px;
+		font-family: "Arial", sans-serif;
+		font-size: 12px;
+		display: table-cell;
+		text-align: center;
+		width: 155px;
+		height: 35px;
+		vertical-align: middle;
+		line-height: normal;
+	}
+	.vcebutton:hover {
+		background-position: 0 -35px;
+	}
+</style>
+<script>
+	
+	function openManual() {
+		document.getElementById("changelog").classList.add("hidden");
+		document.getElementById("manual").classList.remove("hidden");
+	}
+	
+	function openChangeLog() {
+		document.getElementById("manual").classList.add("hidden");
+		document.getElementById("changelog").classList.remove("hidden");
+	}
+	
+	function openSection(elem) {
+		var bodyelem = document.getElementById(elem.getAttribute("value"));
+
+		if(bodyelem === null) {
+			alert("ERROR: Section missing: " + elem.getAttribute("value"));
+			return;
+		}
+
+		console.log(elem);
+		document.querySelector(".entry.selected").classList.remove("selected");
+		document.querySelector(".body div.visible").classList.remove("visible");
+
+		console.log(elem.getAttribute("value"));
+		bodyelem.classList.add("visible");
+		elem.classList.add("selected");
+	}
+</script>
+</head>
+<body>
+<div style="padding: 0">
+	<div class="vcebuttons">
+		<span class="vcebutton" onclick="openManual()">Manual</span>
+		<span class="vcebutton" onclick="openChangeLog()">Changelog</span>
+	</div>
+</div>
+<div class="flexbox" id="manual">
+
+	<div id="menu">
+		<div onclick="openSection(this)" value="intro" class="entry selected"><img class="icon" src="./icons/information.png"> Introduction</div>
+		<div onclick="openSection(this)" value="history" class="entry"><img class="icon" src="./icons/information.png"> History</div>
+		<div onclick="openSection(this)" value="credits" class="entry"><img class="icon" src="./icons/information.png"> Credits</div>
+		<div class="entry"><span class="icon"></span></div>
+		<div onclick="openSection(this)" value="beginner" class="entry"><img class="icon" src="./icons/beginner.png"> Beginner</div>
+		<div class="entry"><span class="icon"></span></div>
+		<div onclick="openSection(this)" value="variables" class="entry"><span class="icon"></span> Variables</div>
+		<div onclick="openSection(this)" value="values" class="entry"><span class="icon"></span> Values</div>
+		<div onclick="openSection(this)" value="saving-loading" class="entry"><span class="icon"></span> Saving/Loading</div>
+		<div onclick="openSection(this)" value="retro-check" class="entry"><span class="icon"></span> Retro Check</div>
+		<div class="entry"><span class="icon"></span></div>
+		<div onclick="openSection(this)" value="advanced" class="entry"><img class="icon" src="./icons/advanced.png"> Advanced</div>
+		<div onclick="openSection(this)" value="multiple-if-statements" class="entry"><span class="icon"></span> Multiple IF Statements</div>
+		<div onclick="openSection(this)" value="functions" class="entry"><span class="icon"></span> Functions</div>
+		<div onclick="openSection(this)" value="varlinks" class="entry"><span class="icon"></span> VarLinks</div>
+	</div>
+
+	<div class="body">
+		<div id="intro" class="visible">
+			<h1>Introduction</h1>
+			Welcome to the VCE Handbook! My name is Duckster, and I'll be your guide.<br>
+			<br>
+			First off, if you're new to the VCE, I suggest you start at the first beginner tab, and continue step by step until you reach the end. If you have prior experience, feel free to jump around in the handbook. If you reach a section where you don't know how to do something, you might be too far in.<br>
+			<br>
+			For those who actually are about the time and effort that went into this mod, feel free to read the History and Credits sections.<br>
+		</div>
+
+		<div id="history">
+			<h1>History</h1>
+			Since the beginning of Blockland, players have always wanted to design their own role-playing game, design advanced event contraptions, or even simple contraptions that would be impossible with the default selection of events. These desires is what fueled this mod into creation. Zack0Wack0 is the man for the job. He wished to create a mod the revolutionized the eventing world, and so he did. When events were first developed in Blockland, Zack0Wack0 teamed up with one of his scripting idols, Chrono. Chrono created the first version of the mod and sent it to Zack0Wack0. Zack0Wack0 then hosted the mod, and the crowd went wild.<br>
+			<br>
+			Eventually, Chrono grew tired of working on the mod. Zack0Wack0 then carried the project on through the fourth version. Zack0Wack0 has tagged Truce along as a sidekick, and he created some extensions to the mod. After that, the mod remained unchanged, as the people of Blockland loved it as it was.<br>
+			<br>
+			A while after Zack0Wack0's downtime, small talk had begun about a "Variable Replacers" system. Clockturn had messaged Zack0Wack0, and told him that he had a variable replacer system. This evolved into the fifth installment of the mod. The entire core of the mod was complete rewritten, optimized, and soon released among a few beta testers. Many people loved it, but some could not understand it. That is when this manual was born. The event mod continued to become more advanced with nifty features as new ideas tumbled into Zack0Wack0's hands.<br>
+			<br>
+			I long time later, in the eleventh version of the mod, Zack0Wack0 summoned Boom to help out with the manual. Since the fifth version, he understood the mod very well, and has mastered every aspect of the mod. Because Boom can speak to the common people in lamens terms, he was put up to the task of rewriting the manual for better understanding. A lot of time has been put into this mod, and it has evolved greatly since its first version. Hopefully everyone will continue to enjoy it. Have fun!
+		</div>
+
+		<div id="credits">
+			<h1>Credits</h1>
+			<ul>
+			<li> Zack0Wack0: Creator; Documentation; Scripter; GUIs</li>
+			<li> Clockturn: Scripter</li>
+			<li> Chrono: Scripter</li>
+			<li> Truce: Scripter; GUIs</li>
+			<li> Lilboarder: Testing; Documentation</li>
+			<li> Jaydee: Testing</li>
+			<li> Boom: Manual Writer</li>
+			<li> All of the awesome people who use this mod <img src="./emotes/emoticon_waii.png"></li>
+			</ul>
+		</div>
+
+		<div id="beginner">
+			<h1>Beginner</h1>
+			Welcome to the first part of the VCE Handbook. Before you go in depth in the VCE and play around with variables, it would be a good idea to know exactly what a variable is.<br>
+			<br>
+			A variable is simply something that changes. Its opposite, a constant, does not change. An example of a constant would be the symbol for Pi (3.141...). Pi never changes. A variable on the other hand, does. A good example of a variable is money. Let's say that you have $40. Therefore, we could have a variable called "Cash" and set it to 40. Now, let's say you buy an item for $10. You now have $30. How did you know that? You simply subtracted $10 from the original $40 to get $30. In the VCE, you would modified the "Cash" variable by subtracting 10 from it. Pretty simple, huh?<br>
+			<br>
+			Now that you know the basic concept of variables, it's time to break down the formatting of the VCE. The biggest part of the VCE is the ability to use IF statements. An IF statement in the VCE looks like this: "onActivate -&gt; Self -&gt; VCE_ifVariable -&gt; [Cash] &gt;= [40] [ ]". In the VCE, certain things go in certain places. In the first box, you have the variable being compared. In the second box, you have what it is being compared to, and inbetween the two, you have two comparison symbols telling the VCE how it's being compared. You will learn about the last box in the section called "Multiple IF Statements". Until then, only use one IF statement per brick. For those who can't tell, "&gt;=" means greater than or equal to. Here's what this IF statement is saying in english, "if "cash" is greater than or equal to 40, ...". This statement will either come back true or false.<br>
+			<br>
+			By using the inputs that come with the VCE, you can make things happen based on whether or not the IF statement was true or false. For the IF statements, you will use onVariableTrue, for when the statement is true, and onVariableFalse, for when the statement is false. Before we continue, allow me to show you all of the comparison symbols and their meaning:<br>
+			<br>
+			== : Equal to<br>
+			!= : Not equal to<br>
+			&gt;= : Greater than or equal to<br>
+			&lt;= : Less than or equal to<br>
+			&gt; : Greater than<br>
+			&lt; : Less than<br>
+			~= : Similar or equal to<br>
+			<br>
+			Now you know the basic format behind the VCE. I think you are ready to start making your own variables!
+		</div>
+
+		<div id="variables">
+			<h1>Variables</h1>
+			Welcome to the Variable section in the VCE Handbook. Before you continue reading this section, be sure that you understand the concept of a variable. In the VCE, you can make your own variables. These variables can be used for keep track of money, stats, scores, you name it. To make a variable, you can simply use the VCE_modVariable output event. Here's what that will look like: "onActivate -&gt; Self -&gt; VCE_modVariable {Brick} -&gt; [Cash] add [1]". As you can see, there are four parameters in this event. There's the target of where the variable is located, the variable you are modifying, how you are modifying it, and by how much you are modifying it. In the example, I am adding "1" to the variable "Cash". The "Cash" variable is on the "Brick" target. There are many ways to modify a variable. Here's a list of them, and what they do:<br>
+			<br>
+			Set : Sets the variable to the specified number<br>
+			Add : Adds the specified number to the variable<br>
+			Subtract : Subtracts the specified number from the variable<br>
+			Multiply : Multiplies the variable by the specified number<br>
+			Divide : Divides the variable by the specified number<br>
+			Floor : Rounds the variable down. Specified number unused.<br>
+			Ceil : Rounds the variable up. Specified number unused.<br>
+			Power : Sets the variable as the base, and the specified number as the exponent<br>
+			squareRoot : Finds the square root of the variable. Specified number unused.<br>
+			Percent : Takes the specified number, divides it by the variable, and converts to percent.<br>
+			randomNum : Sets the variable as the minimum, the specified number as the maximum, and randomly picks an integer between.<br>
+			getWord : Finds the Nth word in the variable. N is set to the specified number.<br>
+			strLow : Makes all characters in the variable lowercase. Specified number unused.<br>
+			strUp : Makes all characters in the variable uppercase. Specified number unused.<br>
+			strChar : Finds all characters and symbols that proceed the specified number/character.<br>
+			strLen : Counts up the number of characters in the variable. Specified number unused.<br>
+			<br>
+			As you can see, there are many ways to modify a variable. Now that you know how to modify a variable, it's time for you to learn about variable replacers. The fancy term "Variable Replacer" simply means a word that replaces the variable in such a way that the VCE can interpret it. Variable replacers can be used in evented prints, specified numbers in modification, and IF statements. If you have not learned IF statements, please go back and read the previous section.<br>
+			<br>
+			Now, a variable replacer works in three parts. You have the term "var", which simply specifies that the string is a variable. Next, you have the target. The target can range anywhere from the brick, player, client, vehicle, or minigame. There is also global variables which can only be used in variable replacers, and also a Named Brick target feature. You simply use "nb_(brick name)" as the target.<br>
+			<br>
+			Lastly, you have the name of the variable. Each section is seperated by a colon. The string starts with a "&lt;", and ends with a "&gt;". Let's use the example, "Cash". I know that "Cash" was set to the brick target. Therefore, my variable replacer will look like this: &lt;var:brick:cash&gt;. Variable replacers are not case-sensitive. Also, you can substitute the target of the variable replacer like so: "br" for brick, "pl" for player, "cl" for client, "ve" for vehicle, "mg" for minigame, and "gl" for global. It's very simple.<br>
+		</div>
+
+		<div id="values">
+			<h1>Values</h1>
+			Welcome to the Value section in the VCE Handbook. Values are very similiar to variables. In fact, they are variables, but values are special variables. When using the output VCE_ifValue, you will see a setup very similar to VCE_ifVariable. Instead of using the name of the variable in the first box, you can only use variable replacers. If you do not know what variable replacers are, please read the previous section.<br>
+			<br>
+			So, what makes a variable special? Simple. A special variable, or value, is simply a variable that you cannot modify. For example, there is a value that checks if the player is an admin. It's a good variable to have, but you don't want people modifying it to become an admin. Therefore, it is a value. Here is a full list of values' variable replacers and what they correspond to:<br>
+			<br>
+			&lt;var:brick:datablock&gt; : The name of the brick's datablock<br>
+			&lt;var:brick:colorID&gt; : The color ID of the brick<br>
+			&lt;var:brick:printcount&gt; : The brick's print count<br>
+			&lt;var:brick:printname&gt; : The name of the brick's print<br>
+			&lt;var:brick:name&gt; : The name of the brick<br>
+			&lt;var:brick:colorFxID&gt; : The color effect ID of the brick<br>
+			&lt;var:brick:printID&gt; : The print ID of the brick<br>
+			&lt;var:brick:shapeFxID&gt; : The brick's shape effect ID<br>
+			&lt;var:brick:ownerName&gt; : The owner of the brick's name<br>
+			&lt;var:brick:ownerBL_ID&gt; : The owner of the brick's Blockland ID<br>
+			<br>
+			&lt;var:client:bl_id&gt; The client's Blockland ID<br>
+			&lt;var:client:name&gt; : The client's name<br>
+			&lt;var:client:clanPrefix&gt; : The client's clan tag shown before their name<br>
+			&lt;var:client:clanSuffix&gt; : The client's clan tag shown after their name<br>
+			&lt;var:client:score&gt; : The client's score<br>
+			&lt;var:client:lastmsg&gt; : The client's last message<br>
+			&lt;var:client:lastteammsg&gt; : The client's last team message<br>
+			&lt;var:client:isAdmin&gt; : Checks if the client is any kind of admin (1 = True, 0 = False [Boolean])<br>
+			&lt;var:client:isSuperAdmin&gt; : Checks if the client is a super admin (Boolean)<br>
+			&lt;var:client:isHost&gt; : Checks if the client is the host (Boolean)<br>
+			&lt;var:client:brickcount&gt; : The number of bricks planted by the client<br>
+			<br>
+			&lt;var:player:damage&gt; : The amount of damage that has been done to the player<br>
+			&lt;var:player:health&gt; : The amount of health the player has left<br>
+			&lt;var:player:maxHealth&gt; : The most health the player can have<br>
+			&lt;var:player:velx&gt; : The player's velocity on the global X axis<br>
+			&lt;var:player:velY&gt; : The player's velocity on the global Y axis<br>
+			&lt;var:player:velZ&gt; The player's velocity on the global Z axis<br>
+			&lt;var:player:crouching&gt; : Checks if the player is crouching (Boolean)<br>
+			&lt;var:player:jumping&gt; : Checks if the player is jumping (Boolean)<br>
+			&lt;var:player:jetting&gt; : Checks if the player is jetting (Boolean)<br>
+			&lt;var:player:firing&gt; : Checks if the player is firing/clicking (Boolean)<br>
+			&lt;var:player:sitting&gt; : Checks if the player is sitting (Boolean)<br>
+			&lt;var:player:datablock&gt; : The player's datablock name<br>
+			&lt;var:player:currentItem&gt; : The UI name of the player's current item<br>
+			&lt;var:player:item*&gt; : The UI name of the *th item in the player's inventory (1-5)<br>
+			&lt;var:player:energy&gt; : The amount of energy the player has<br>
+			<br>
+			&lt;var:vehicle:datablock&gt; : The name of the vehicle's datablock<br>
+			&lt;var:vehicle:health&gt; : The amount of health the vehicle has<br>
+			&lt;var:vehicle:maxhealth&gt; : The maximum amount of health the vehicle can have<br>
+			<br>
+			&lt;var:global:date&gt; : The current date<br>
+			&lt;var:global:time&gt; : The current time<br>
+			&lt;var:global:simtime&gt; The current simulated time<br>
+			&lt;var:global:macintosh&gt; : Checks if the user is on a Macintosh Computer (Boolean)<br>
+			&lt;var:global:windows&gt; : Checks if the user is on a Windows Computer<br>
+			&lt;var:global:serverName&gt; : The name of the server<br>
+			&lt;var:global:port&gt; : The number of the port the user is accessing the server on<br>
+			&lt;var:global:maxPlayerCount&gt; : The maximum number of players the server can have<br>
+			&lt;var:global:playerCount&gt; : The number of players on the server<br>
+			&lt;var:global:brickcount&gt; : The total number of bricks on the server<br>
+			<br>
+			As you can see, there is a very long list of values that can be used. The targets of values may be shortened too. You are not limited to just using values in VCE_ifValue. Any variable replacer will work. Now that you know all of the values, why not go try some out?
+		</div>
+
+		<div id="saving-loading">
+			<h1>Saving/Loading</h1>
+			Welcome to the Saving and Loading Variables section in the VCE Handbook. Saving and Loading variables is probably the easiest part of the VCE. Since you should understand variables very well by now, this section will go quickly for you.<br>
+			<br>
+			First off, you can only save player and client variables. Good news is, you can reload them later. This means that if a user leaves the servers and looses his player and client tied variables, he or she can reload them through the VCE as long as the server has been up while they were gone.<br>
+			<br>
+			To save variables, you use the VCE_saveVariable command on the Self target. To load variables, you use the VCE_loadVariable command that is also on the self target. The layout is pretty straight forward, so you should not get lost. Just simply type in the name of the variable you wish to save or load. To load more than one, you can do this: "Var1, Var2, Var3, Var4". See how each variable is followed by a comma and a space? If you're trying to load a lot of variables, spaces can add to the character count, disallowing you to keep adding variables that you want to save or load. You can actually just use commas to seperate the variables like so: "Var1,Var2,Var3,Var4". Be warned, if you start using one format of seperation, do not switch. This would be incorrect: "Var1, Var2, Var3,Var4" See how there is no space between Var3 and Var4? That needs to be changed or the variables will not load correctly. Now that you can save and load your variables, the limits of the VCE just improved.<br>
+		</div>
+
+		<div id="retro-check">
+			<h1>Retro Check</h1>
+			Welcome to the Retro Check section in the VCE Handbook. As advanced as Retro Check may seem, I can assure you, it is not. It is placed after the Values section because I wanted you to learn the new way of using values rather than this. Retro Check is simply for the users of the VCE who liked the old way of checking variables better. Here's a list of Retro Check options, and what they relate to:<br>
+			<br>
+			ifPlayerName : The player's name (&lt;var:cl:name&gt;)<br>
+			ifPlayerID : The player's ID (&lt;var:cl:BL_ID&gt;)<br>
+			ifAdmin : If the player is any kind of admin (Boolean) (&lt;var:cl:isAdmin&gt;)<br>
+			ifPlayerEnergy : The amount of energy the player has (&lt;var:pl:energy&gt;)<br>
+			ifPlayerDamage : The player's damage (&lt;var:pl:damage&gt;)<br>
+			ifPlayerScore : The player's score<br>
+			ifLastPlayerMsg : The last message from the player (&lt;var:cl:lastmsg&gt;)<br>
+			ifBrickName : The name of the brick (&lt;var:br:name&gt;)<br>
+			ifRandomDice : A random number between 1 and 6<br>
+			<br>
+			VCE_retroCheck works just like any other value, it can't be changed through the VCE, however, it can't be displayed in an evented print unless you use its variable replacer correspondant. This concludes the Retro Check section of the VCE handbook.
+		</div>
+
+		<div id="advanced">
+			<h1>Advanced</h1>
+			Welcome to the Advanced section in the VCE Handbook. The following chapters discuss slightly more advanced features of the VCE. I recommend getting used to the basics beforehand. If you feel lost, that's okay, it just means that you are not yet ready for the advanced portion of the VCE.
+		</div>
+
+		<div id="multiple-if-statements">
+			<h1>Multiple IF Statements</h1>
+			Welcome to the Multiple IF Statements section in the VCE Handbook. In the VCE, having multiple IF statements is really easy. Remember the last box on the VCE_ifVariable output? That can be used for multiple IF statements. Before we dive into using more than one IF statement, you need to know what that box does. Let's say you want two IF statements on one brick. Well, you can't go about doing this, because one IF statement executes all of the onVariableTrue/False events. With the last box on the right, you can control which events are executed. Let's say your first IF statement corresponds to the three events following it. The number of those events (which can be found on the far left) just happen to be events 3, 4, and 5. If you also had onVariableTrue/False events, they would be triggered too. But, if you type in "3 5" in the rightmost box, that IF statement will only check for onVariableTrue/False events with numbers 3 through 5. Simple, right? Using the last textbox will allow you to have multiple IF statements. As you can see, using multiple IF statements on one brick is really easy. Just for your information, events without an onVariableTrue/False input will not be run through an IF statement. They will simply run through their normal inputs. Now that you know how to use multiple IF statements, go try it out!
+		</div>
+
+		<div id="functions">
+			<h1>Functions</h1>
+			Welcome to the Functions section in the VCE Handbook. Functions are probably the most complex feature in the VCE. Functions come in three parts: calling functions within a brick, calling a function from another brick, and stating arguments while calling a function from another brick. Obviously, we'll start off at square one. The only required knowledge you need to know outside of the VCE for this is Relays. Relays are basically a way of controlling inputs and outputs. If you do not understand the concept of relays, I suggest you learn it.<br>
+			<br>
+			Now, onto part one: calling functions within a brick. So, what's a function? It is quite similar to a relay. Functions, however, have names, meaning more than one per brick can be used. Before you can call a function, you must state that function. You do so with the VCE_stateFunction output on the Self target. VCE_stateFunction has two boxes. A large one, and a small one. The first box is where you put the name of the function. The second box is where you specify which onVariableFunction input events belong to that function. Let's say you've stated the function "Check". You can now call that function with the VCE_callFunction output which is located under the Self target. VCE_callFunction comes with two boxes, this time both of them are large and of equal size. The first box is where you put the name of the function you wish to call. If you put "Check" in the first box, you'll call the function "Check" on the desired input. The second box brings us to part two of functions: calling functions from other bricks. Let's say that the function "Check" is on a brick named "Test". You can call the function "Check" on the named brick "Test" by putting "Check" in the first box, as it is the name of the function, and "Test" in the second box. This will call the function "Check" on all bricks named "Test". It's pretty simple.<br>
+			<br>
+			Now to expose the second box's double feature in the VCE_callFunction command: creating arguments. So, let's use the function "Check" and the brick named "Test" again. Except this time, you will use the Named Brick target instead of the Self target. You will "on(Input) -&gt; &lt;NAMED BRICK&gt; {Test} -&gt; VCE_callFunction -&gt; [Check] [   ]. This alone will call the function "Check" on all bricks named "Test". Doing this no longer ties up the second box, so it is used for something else. Let's use a basic variable replacer, &lt;var:client:name&gt;. If you put "&lt;var:client:name&gt;" into the second box, an argument will be created. The number of arguments starts at 0, and increments by 1. Since "&lt;var:client:name&gt;" is the only thing in the box, it becomes Argument0, or "arg0". Arguments can be displayed with a variable replacer like so: &lt;var:brick:arg0&gt;. Now, "&lt;var:client:name&gt;" is in that second text box which is a VCE_callFunction event with the named brick "Test" as the target. Because "Test" is the target, &lt;var:brick:arg0&gt; applies to all bricks with the name of "Test". Therefore, because "&lt;var:client:name&gt;" is the first argument (arg0), &lt;var:brick:arg0&gt; is the same as &lt;var:client:name&gt;. More than just values may be used as arguments. Custom variables, constants, and characters all work too. This can be handy if you need to transfer the variables from one brick to another. You can have more than one argument in a VCE_callFunction event. Each argument can be seperated by an absolute value sign " | ". So, let's say we have the variables "Gold", "Silver" and "Bronze" on an unnamed brick. You need those variables to be transfered to a brick named "Elements". All you need is to create and function, and the call that function through the Named Brick target. The second box will contain the three variables that we are turning into arguments. They are as followed: "&lt;var:brick:gold&gt; | &lt;var:brick:silver&gt; | &lt;var:brick:bronze&gt;". The variable "Gold" from the unnamed brick will become "arg0" on the brick named Elements. "Silver" will be "arg1", and "Bronze" will be "arg2". You may have as many arguments as you can fit into the text box. Now that you've learned how to use functions, it's time to move on to last section of the VCE Handbook.
+		</div>
+
+		<div id="varlinks">
+			<h1>VarLinks</h1>
+			Welcome to the VarLinks section in the VCE Handbook. Variable Links come in two parts. The actual link, and what it does, along with the input of onVariableUpdate. First off, variable links are only to be used the chat message events. When used, they will simply create a link, and when you click that link, a defined client variable will be set to a defined number.<br>
+			<br>
+			Allow me to break it down. Like variable replacers, a variable link starts with a "&lt;" sign, and ends with a "&gt;" sign. With variable links, there are four parts. The first part is the phrase "varlink", which classifies this as a variable link. Seperated by a colon, the second part is the link name. For example, if I put "Click Here", the link would show as "Click Here". Simple concept. Now, the third section is seperated by an underscore, rather than a colon. After the underscore, you classify the name of the client variable you wish to use. Finally, the fourth section is seperated by another colon, and you type the value that you wish the defined client variable to be.<br>
+			<br>
+			The big picture looks like this "&lt;varlink:link name_variable:value&gt;. So, &lt;varlink:Click Here_clicked:1&gt; in a chat message event would show up as "Click Here", and when you clicked that link, the client variable "clicked" (&lt;var:client:clicked&gt;) would be set to the value of 1. So, how would you make something happen at the same time as someone clicking a link? Simple. Use onVariableUpdate. The input of onVariableUpdate is triggered when a variable is changed, whether it is by a variable link, or by using VCE_modVariable. In the example variable link, I could use the event "onVariableUpdate -&gt; Client -&gt; VCE_ifVariable -&gt; [Clicked] == [1] [ ]" to see if someone clicked the link. Variable links have multiple uses. Now that you know how to use variable links, go put it to good use!
+		</div>
+	</div>
+</div>
+
+<div class="flexbox hidden" id="changelog">
+	<div class="changelog-body">
+		<h1>Changelog</h1>
+		Stable: Was tested to be safe and usually approved by RTB file moderators.<br>
+		Public Beta: Was either hosted on a public server for people to try out or released by post (not uploaded to the add-ons section as official) to find bugs.<br>
+		Private Beta: Was released amongst our beta testers.<br>
+		Skipped: This version was skipped from stable release for certain reasons.<br>
+		Version 6.12 (Stable):
+			<ul><li>Fixed singleplayer/host's variables not working bug (created by the loading save bugfix)</li></ul>
+		Version 6.11 (Stable):
+		<ul>
+			<li>Function arguments now work correctly</li>
+			<li>Fixed v20 loading saves bug</li>
+		</ul>
+		Version 6.1 (Stable):
+		<ul>
+			<li> Fixed more than one word variables not working in if checks, this should fix the problems people were having with the version 6 update</li>
+			<li> Added VCE_relayCallFunction &lt;Direction&gt;, for calling functions on bricks near by (requires full trust with the colliding brick)</li>
+			<li> Fixed a few bugs that I never knew about
+			<ul>
+				<li> &lt;var:player:*&gt; was actually checking the triggering client's player inside Player -&gt; VCE_ifVariable</li>
+				<li> Client -&gt; VCE_modVariable & VCE_ifVariable was mistaking the client you were trying to change the variable on for for the processing/triggering client</li>
+				<li> Fixed ifHost replacer</li>
+			</ul></li>
+			<li> If the minimum number or max number is not set for the Random variable modding method it will now set it to a random float instead</li>
+			<li> You can now use variable replacers in most VCE output event text boxes</li>
+			<ul>
+				<li> VCE_modVariable variable names accept variable replacers, ifVariable, etc</li>
+			</ul>
+			<li> Removed annoying "This server has VCE %version" message</li>
+			<ul>
+				<li> If you still want it you can set $Pref::Client::ShowVCEHandshake to 1 or look in the console as it says it in there when you join a server</li>
+			</ul>
+		</ul>
+		Version 6.01 (Stable):
+		<ul>
+			<li> Fixed enabling and disabling events
+		</ul>
+		Version 6.00 (Stable, Private Beta):
+		<ul>
+			<li> You can now directly modify certain special replacers, changes will be applied to a handling function
+			<ul>
+				<li> (meaning if you change "clanPrefix" it will automatically call a function and apply your changes, ie. set their clan prefix)</li>
+				<li> &lt;var:client:clanPrefix&gt;, &lt;var:client:clanSuffix&gt;</li>
+				<li> &lt;var:client:decal&gt;, &lt;var:client:face&gt;</li>
+				<li> &lt;var:player:health&gt;, &lt;var:player:damage&gt;, &lt;var:player:energy&gt;, &lt;var:player:vel&gt; (x, y, z)</li>
+				<li> &lt;var:player:currentItem&gt;, &lt;var:player:item1&gt; -&gt; &lt;var:player:item5&gt;</li>
+				<li> &lt;var:brick:colorid&gt;, &lt;var:brick:printcount&gt;, &lt;var:brick:printname&gt;</li>
+				<li> &lt;var:brick:name&gt;, &lt;var:brick:colorfxid&gt;, &lt;var:brick:printid&gt;, &lt;var:brick:shapefxid&gt;</li>
+				<li> &lt;var:vehicle:health&gt;, &lt;var:vehicle:damage&gt;</li>
+			</ul></li>
+			<li> Sub data can now contain logic
+			<ul>
+				<li> ~= 2 -- processes all event lines that have a 2 in their digits (2, 12, 20, 21, 22, ...)</li>
+				<li> != 2 -- processes all event lines except 2 (0, 1, 3, 4, ...)</li>
+				<li> == 2 -- processes only event line 2 (2)</li>
+				<li> &gt;= 2 -- processes all event lines larger than/equal to 2 (2, 3, 4, 5)</li>
+				<li> &gt; 2 -- processes all event lines smaller than 2 (0, 1)</li>
+				<li> &lt;= 2 -- processes all event lines smaller than/equal to 2 (0, 1, 2)</li>
+			</ul>
+			</li>
+			<li> You can now use | and & in ifVariable and ifValue. & for an AND operator and | for an OR operator.
+				<ul>
+					<li> Example &lt;var:client:score&gt; & &lt;var:client:bl_id&gt; == 1337
+						<ul>
+							<li>Computes to: Is the client's score and bl_id equal to 1337?</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li> Bug fixes<ul>
+				<li> There was a massive bug in VCE_stateFunction (mindless copy pasta is not good)</li>
+				<li> Other bug fixes I can't remember</li>
+			</ul></li>
+			<li> Seperated the code into seperate files for easier reading</li>
+				<ul><li> All of the code is pretty easy to look at, if you want to learn something</li>
+					<ul><li> Except for outputs.cs... it's as dirty as Clockturn's mum</li></ul></ul>
+			<li> Increased all VCE output events' textbox character limit</li>
+			<li> Manual now caches to make reading the manual faster</li>
+			<li> Avoided adding the 3rd client tab... again <img src="./emotes/emoticon_grin.png"></li>
+		</ul>
+		Version 5.81 (Stable):
+		<ul>
+			<li> VERY important bug fix</li>
+		</ul>
+		Version 5.8 (Stable):
+		<ul>
+			<li> Added new replacers for the client target (decal,face,chest,hip,hat,accent,rleg,rarm,lleg,larm)</li>
+			<li> Added new replacer for the player target (speed)</li>
+			<li> Added new global replacers (hour,minute,second... good for real-time clocks)</li>
+		</ul>
+		Version 5.7 (Stable):
+		<ul>
+			<li> Fixed centerprintall and bottomprintall so that %1 works</li>
+			<li> Made VCE_ifVariable and VCE_modVariable for minigames</li>
+			<li> &lt;var:vehicle:maxhealth&gt;,&lt;var:vehicle:health&gt;,&lt;var:global:brickcount&gt;</li>
+			<li> &lt;var:brick:ownername&gt;, &lt;var:brick:ownerbl_id&gt;, &lt;var:client:brickcount&gt;, &lt;var:player:energy&gt;</li>
+		</ul>
+		Version 5.61 (Stable):
+		<ul>
+			<li> Made it so all inputs have a bot target</li>
+				<li> The bot target will only work on vehicle spawns</li>
+			<li> Some other minor stuff I can't remember</li>
+		</ul>
+		Version 5.6 (Stable):
+		<ul>
+			<li> Added onVariableUpdate. Triggered when VCE_modVariable is called on the brick, or when a varlink is clicked.</li>
+			<li> Added &lt;varlink:linkname_varname:value&gt; for having links that you can click to set variables. </li>
+				<li> For example, &lt;varlink:Click here_gold:1&gt; will appear as a blue "Click here" link, which when clicked will set the client's "gold" variable to 1. Use with onVariableUpdate to do something when the client's click the link.</li>
+		</ul>
+		Version 5.5 (Stable):
+		<ul>
+			<li> Added &lt;var:client:clanPrefix&gt; and &lt;var:client:clanSuffix&gt; - self explanatory</li>
+			<li> Added ~= logic operator for every variable check. It checks if the value you enter on the right side of the operator is inside the value on the left side
+				<ul>
+					<li> 100 ~= 10; will trigger onVariableTrue because 10 is inside the string of 100</li>
+				</ul>
+			</li>
+			<li>Added VCE_retroCheck output for bricks. For all you whiners for lack of if* events. Has all of the old if* events in one event</li>
+		</ul>
+		Version 5.43 (Stable):
+		<ul>
+			<li> Fixed %1 not working in minigames</li>
+			<li> Fixed displaying variables glitching up sometimes</li>
+			<li> Made the manual pop up the first time you use variables and open the event gui</li>
+		</ul>
+		Version 5.42 (Stable):
+		<ul>
+			<li> Fixed general shit</li>
+		</ul>
+		Version 5.41 (Stable):
+		<ul>
+			<li> 'Global' special replacers (date, time, windows, macintosh, simtime, servername, port, maxplayercount, playercount)</li>
+			<li> Fixed replacers sometimes displaying as the normal text without being replaced with values</li>
+			<li> Added VCE_modVariable to each target</li>
+		</ul>
+		Version 5.40 (Private Beta, Stable):
+		<ul>
+			<li> Extensive update on the client-side of VCE (access menu by wrench events menu or bind a control)
+				<ul>
+					<li> Manual: Updates with the internet within 1 second (faster then the dropbox one, some sort of spam protection on dropbox?)</li>
+					<li> Changelog: Read this file in game with pretty icons lol</li>
+					<li> <span style="color: #FF0000">Coming in v5.41</span> - Online: View and post tutorials on vce (or events in general?)
+						<ul>
+							<li> On my website <span style="color:#646464">(link removed)</span></li>
+						</ul>
+						</li>
+					<li> All icons from <a href="http://www.famfamfam.com">famfamfam.com</a> <img src="./emotes/heart.png"></li>
+				</ul>
+			</li>
+			<li> Saving variables (VCE_loadVariable and VCE_saveVariable now allow saving of multiple variables seperated in a comma delimeted list ("gold,wood or gold, wood") <img src="./emotes/emoticon_grin.png"> ) </li>
+			<li> Vehicle and Minigame variable support (including variable replacers)</li>
+			<li> VCE Functions with arguements &gt;:D</li>
+		</ul>
+		Version 5.33 (Public Beta, Skipped):
+		<ul>
+			<li> Fixed some small issues</li>
+			<li> Remove VCE_callOutput
+				<ul>
+					<li> It's too god damn hacky <img src="./emotes/emoticon_unhappy.png"></li>
+				</ul>
+			</li>
+		</ul>
+		Version 5.32 (Public Beta, Skipped):
+		<ul>
+			<li> Fixed some small issues</li>
+		</ul>
+		Version 5.31 (Public Beta, Skipped):
+		<ul>
+			<li> Fixed some small issues</li>
+		</ul>
+		Version 5.30 (Public Beta, Skipped):
+		<ul>
+			<li> Vehicle and Minigame variable support
+			<li> VCE Functions with arguements &gt;:D
+				<ul>
+					<li> State them with sub data then call them later with arguements seperated by |</li>
+				</ul>
+			</li>
+			<li> VCE_CallOutput (<span style="color: #F00">Removed</span>)
+				<ul>
+					<li> call output events with arguements that get filtered for replacers
+				</ul>
+			</li>
+		</ul>
+		Version 5.23 (Stable):
+		<ul>
+			<li> Now invulnerable from VCE for 5 seconds when spawning
+			<li> Fixed random numbers being displayed with TDM
+		</ul>
+		Version 5.22 (Stable):
+		<ul>
+			<li> Fixed some small issues
+		</ul>
+		Version 5.00 (Private Beta, Stable):
+		<ul>
+			<li> Variable Replacers; filters out messages with variable values
+				<ul>
+					<li> Syntax = &lt;var:target:name&gt;</li>
+					<li> Includes 'special values' (removes millions of If* outputs) such as &lt;var:client:name&gt; and &lt;var:client:BL_ID&gt;</li>
+				</ul>
+			</li>
+			<li> Multiple variable events, using 'sub data'
+				<ul>
+					<li> A valid example of sub data: 0 3 (only processes onVariableTrue or onVariableFalse in event lines 0 to 3)</li>
+				</ul>
+			</li>
+			<li> Code completely cleaned up
+		</ul>
+		Version 4.00 (Public Beta, Stable):
+		<ul>
+			<li> ifPlayerScore
+			<li> ifPlayerID
+			<li> ifPlayerDamage
+			<li> ifPlayerEnergy
+			<li> ifPlayerSpeed
+			<li> ifLastPlayerMsg
+			<li> Saving variables by Truce
+		</ul>
+		Version 3.00 (Stable):
+		<ul>
+			<li> ifAdmin
+			<li> ifBrickNameEquals
+			<li> ifPlayerNameEquals
+			<li> ifRandomDice
+			<li> ifRandom
+		</ul>
+		Version 2.00 (Stable):
+		<ul>
+			<li> displayVariable
+			<li> setVariable, multiplyVariable etc for brick targets</li>
+			<li> addVarToVar</li>
+			<li> subVarToVar</li>
+			<li> setVarToVar</li>
+			<li> ifVarToVar</li>
+			<li> Removed subVariable (use -1 in add variable)</li>
+		</ul>
+		Version 1.10 (Stable):
+		<ul>
+			<li> All ifVariables cleaned up into one</li>
+		</ul>
+		Version 1.00 (Stable):
+		<ul>
+			<li> Player and Client: setVariable, addVariable, subVariable, divideVariable, multiplyVariable</li>
+			<li> ifVariableGreater, ifVaribleLess, ifVariableGreaterEquals, ifVariableLessEquals, ifVariableNotEquals, ifVariableEquals</li>
+		</ul>
+	</div>
+</div>
+
+</div>
+</body>
+</html>
