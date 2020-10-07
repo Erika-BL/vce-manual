@@ -99,3 +99,8 @@ function loadManual(event) {
 		bodyelem.classList.add("visible");
 	}
 }
+
+// allow the manual to run offline
+if('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('sw.js');
+}
