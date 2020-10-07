@@ -102,5 +102,6 @@ function loadManual(event) {
 
 // allow the manual to run offline
 if('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('sw.js');
+	navigator.serviceWorker.register('sw.js')
+	.catch(err => console.warn("Service worker not registered.", err));
 }
