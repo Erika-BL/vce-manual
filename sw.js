@@ -15,6 +15,8 @@ self.addEventListener('install', event => {
 				'assets/icons/information.png',
 				'assets/icons/beginner.png',
 				'assets/icons/advanced.png',
+				'assets/icons/bullet_black.png',
+				'assets/icons/bullet_arrow_down.png',
 
 				'assets/emotes/emoticon_waii.png',
 				'assets/emotes/emoticon_grin.png',
