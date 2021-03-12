@@ -96,6 +96,7 @@ ul ul {
 	width:16px;
 	height:16px;
 	margin-right:4px;
+	pointer-events: none;
 }
 .flexbox.hidden, .body div {
 	display: none !important;
